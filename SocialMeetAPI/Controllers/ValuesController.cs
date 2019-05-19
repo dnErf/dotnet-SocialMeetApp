@@ -11,7 +11,6 @@ using SocialMeetAPI.Data;
 namespace SocialMeetAPI.Controllers
 {
 
-  [Authorize]
   [Route("api/[controller]")]
   [ApiController]
   public class ValuesController : ControllerBase

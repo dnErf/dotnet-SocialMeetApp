@@ -63,7 +63,7 @@ namespace SocialMeetAPI.Controllers
         Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value) // token salt
       );
 
-      var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+      var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
       var tokenDescriptor = new SecurityTokenDescriptor
       {
@@ -76,10 +76,17 @@ namespace SocialMeetAPI.Controllers
 
       var token = tokenHandler.CreateToken(tokenDescriptor);
 
-      return Ok( new {
-        token = tokenHandler.WriteToken(token)
-      });
-
+      if (token != null)
+      {
+        Console.WriteLine(token);
+        return Ok( new {
+          token = tokenHandler.WriteToken(token)
+        });
+      }
+      else 
+      {
+        return Unauthorized();
+      }
     }
 
   }
