@@ -25,6 +25,7 @@ namespace SocialMeetAPI.Helpers
           opt.ResolveUsing(d => d.DateOfBirth.CalculateAge()); // automapper version not supported
         });
       CreateMap<Photo, PhotosForDetailedDto>();
+      CreateMap<UserForUpdateDto, User>();
     }
   }
 }
