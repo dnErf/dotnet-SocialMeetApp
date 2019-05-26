@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -20,14 +21,23 @@ namespace SocialMeetAPI.Controllers
   {
     private readonly IAuthRepository _repo;
     private readonly IConfiguration _config;
-    public AuthController(IAuthRepository repo, IConfiguration config)
+    private readonly IMapper _mapper;
+
+    public AuthController(
+        IAuthRepository repo, 
+        IConfiguration config,
+        IMapper mapper
+      )
     {
       _config = config;
+      _mapper = mapper;
       _repo = repo;
     }
+
     [HttpPost("register")]
     public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
     {
+
       userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
       if (await _repo.UserExists(userForRegisterDto.Username))
@@ -41,6 +51,7 @@ namespace SocialMeetAPI.Controllers
       var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
 
       return StatusCode(201); // recode to should be CreatedAtRoute()
+
     }
 
     [HttpPost("login")]
@@ -76,17 +87,20 @@ namespace SocialMeetAPI.Controllers
 
       var token = tokenHandler.CreateToken(tokenDescriptor);
 
+      var user = _mapper.Map<UserForListDto>(userFromRepo);
+
       if (token != null)
       {
-        Console.WriteLine(token);
         return Ok( new {
-          token = tokenHandler.WriteToken(token)
+          token = tokenHandler.WriteToken(token),
+          user
         });
       }
       else 
       {
         return Unauthorized();
       }
+      
     }
 
   }

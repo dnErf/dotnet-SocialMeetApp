@@ -27,6 +27,8 @@ namespace SocialMeetAPI.Migrations
 
                     b.Property<bool>("IsMain");
 
+                    b.Property<string>("PublicID");
+
                     b.Property<string>("Url");
 
                     b.Property<int>("UserId");
@@ -58,6 +60,8 @@ namespace SocialMeetAPI.Migrations
                     b.Property<string>("Introduction");
 
                     b.Property<string>("KnownAs");
+
+                    b.Property<DateTime>("LastActive");
 
                     b.Property<string>("LookingFor");
 

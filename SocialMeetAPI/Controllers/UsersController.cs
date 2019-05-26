@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -6,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 using SocialMeetAPI.Data;
 using SocialMeetAPI.Dtos;
 
@@ -24,6 +24,7 @@ namespace SocialMeetAPI.Controllers
       _repo = repo;
       _mapper = mapper;
     }
+
     [HttpGet]
     public async Task<IActionResult> GetUsers()
     {
@@ -31,6 +32,7 @@ namespace SocialMeetAPI.Controllers
       var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
       return Ok(usersToReturn);
     }
+    
     [HttpGet("{id}")]
     public async Task<IActionResult> GetUser(int id)
     {

@@ -38,6 +38,7 @@ namespace SocialMeetAPI
     public void ConfigureServices(IServiceCollection services)
     {
       // services.AddTransient<Seed>();
+
       services.AddCors();
       services.AddAutoMapper();
       services.AddDbContext<DataContext>(ctx => ctx.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
@@ -45,6 +46,8 @@ namespace SocialMeetAPI
         .AddJsonOptions(opt => {
           opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
         });
+      services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+
       services.AddScoped<IAuthRepository, AuthRepository>();
       services.AddScoped<ISocialMeetRepository, SocialMeetRepository>();
       services
@@ -65,6 +68,7 @@ namespace SocialMeetAPI
                 };
               }
           );
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
