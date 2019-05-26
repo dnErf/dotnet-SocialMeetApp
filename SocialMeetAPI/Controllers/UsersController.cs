@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 
 using SocialMeetAPI.Data;
 using SocialMeetAPI.Dtos;
+using SocialMeetAPI.Helpers;
 
 namespace SocialMeetAPI.Controllers
 {
+  [ServiceFilter(typeof(LogUserActivity))]
   [Authorize]
   [Route("api/[controller]")]
   [ApiController]

@@ -1,5 +1,7 @@
 ### Social Meet Up
+- simple social media web app
 
 #### Tech Stack
 - API : .Net Core
-- SPO : Angular
+- SPA : Angular
+- ORM : Entity Framework

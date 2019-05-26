@@ -48,6 +48,7 @@ namespace SocialMeetAPI
         });
       services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
 
+      services.AddScoped<LogUserActivity>();
       services.AddScoped<IAuthRepository, AuthRepository>();
       services.AddScoped<ISocialMeetRepository, SocialMeetRepository>();
       services
