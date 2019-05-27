@@ -16,6 +16,19 @@ namespace SocialMeetAPI.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
+            modelBuilder.Entity("SocialMeetAPI.Models.Like", b =>
+                {
+                    b.Property<int>("LikerId");
+
+                    b.Property<int>("LikeeId");
+
+                    b.HasKey("LikerId", "LikeeId");
+
+                    b.HasIndex("LikeeId");
+
+                    b.ToTable("Likes");
+                });
+
             modelBuilder.Entity("SocialMeetAPI.Models.Photo", b =>
                 {
                     b.Property<int>("Id")
@@ -27,7 +40,7 @@ namespace SocialMeetAPI.Migrations
 
                     b.Property<bool>("IsMain");
 
-                    b.Property<string>("PublicID");
+                    b.Property<string>("PublicId");
 
                     b.Property<string>("Url");
 
@@ -86,6 +99,19 @@ namespace SocialMeetAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Values");
+                });
+
+            modelBuilder.Entity("SocialMeetAPI.Models.Like", b =>
+                {
+                    b.HasOne("SocialMeetAPI.Models.User", "Likee")
+                        .WithMany("Likers")
+                        .HasForeignKey("LikeeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SocialMeetAPI.Models.User", "Liker")
+                        .WithMany("Likees")
+                        .HasForeignKey("LikerId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SocialMeetAPI.Models.Photo", b =>
