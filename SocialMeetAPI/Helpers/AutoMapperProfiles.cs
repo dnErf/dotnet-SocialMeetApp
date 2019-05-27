@@ -1,6 +1,6 @@
-
-using System.Linq;
 using AutoMapper;
+using System.Linq;
+
 using SocialMeetAPI.Dtos;
 using SocialMeetAPI.Models;
 

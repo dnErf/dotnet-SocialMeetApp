@@ -1,4 +1,3 @@
-
 namespace SocialMeetAPI.Helpers
 {
   public class CloudinarySettings
