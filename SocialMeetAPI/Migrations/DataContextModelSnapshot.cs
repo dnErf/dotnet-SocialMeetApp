@@ -29,6 +29,36 @@ namespace SocialMeetAPI.Migrations
                     b.ToTable("Likes");
                 });
 
+            modelBuilder.Entity("SocialMeetAPI.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content");
+
+                    b.Property<DateTime?>("DateRead");
+
+                    b.Property<bool>("IsRead");
+
+                    b.Property<DateTime>("MessageSent");
+
+                    b.Property<bool>("RecipientDeleted");
+
+                    b.Property<int>("RecipientId");
+
+                    b.Property<bool>("SenderDeleted");
+
+                    b.Property<int>("SenderId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipientId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("SocialMeetAPI.Models.Photo", b =>
                 {
                     b.Property<int>("Id")
@@ -111,6 +141,19 @@ namespace SocialMeetAPI.Migrations
                     b.HasOne("SocialMeetAPI.Models.User", "Liker")
                         .WithMany("Likees")
                         .HasForeignKey("LikerId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SocialMeetAPI.Models.Message", b =>
+                {
+                    b.HasOne("SocialMeetAPI.Models.User", "Recipient")
+                        .WithMany("MessageRecieved")
+                        .HasForeignKey("RecipientId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SocialMeetAPI.Models.User", "Sender")
+                        .WithMany("MessageSent")
+                        .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
