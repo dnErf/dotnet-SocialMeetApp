@@ -1,5 +1,6 @@
+import { CanDeactivate } from '@angular/router';
 import { Injectable } from "@angular/core";
-import { CanDeactivate } from '@angular/router/src/utils/preactivation';
+
 import { MemberEditComponent } from '../members/member-edit/member-edit.component';
 
 @Injectable()

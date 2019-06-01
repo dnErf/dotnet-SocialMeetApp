@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
-import { Pagination, PaginatedResult } from '../_models/pagination';
-import { UserService } from '../_services/user.service';
-import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+
 import { AlertifyService } from '../_services/alertify.service';
+import { AuthService } from '../_services/auth.service';
+import { UserService } from '../_services/user.service';
+
+import { Message } from '../_models/message';
+import { Pagination, PaginatedResult } from '../_models/pagination';
 
 @Component({
   selector: 'app-messages',

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-
-import { User } from '../_models/user';
-import { Message } from '../_models/message';
-import { PaginatedResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';
+
+import { Message } from '../_models/message';
+import { User } from '../_models/user';
+import { PaginatedResult } from '../_models/pagination';
 
 // const httpOptions = {
 //   headers: new HttpHeaders({
@@ -25,12 +25,12 @@ export class UserService {
 
   getUsers(page?, itemsPerPage?, userParams?, likesParam?):Observable<PaginatedResult<User[]>> {
 
-    const paginatedResult:PaginatedResult<User[]> = PaginatedResult<User[]>();
+    const paginatedResult:PaginatedResult<User[]> = new PaginatedResult<User[]>();
 
     let params = new HttpParams();
 
     if (page != null && itemsPerPage != null) {
-      params = params.appent('pageNumber', page);
+      params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
     }
 
@@ -81,11 +81,11 @@ export class UserService {
     return this.http.delete(this.baseUrl + 'users/' + userId + '/photos/' + id);
   }
 
-  sendLike(id:number, recipient:number) {
+  sendLike(id:number, recipientId:number) {
     return this.http.post(this.baseUrl + 'users/' + id + '/like' + recipientId, {});
   }
 
-  getMessages(id:number, page?, itemsPerPage, messageContainer?) {
+  getMessages(id:number, page?, itemsPerPage?, messageContainer?) {
     const paginatedResult:PaginatedResult<Message[]> = new PaginatedResult<Message[]>();
 
     let params = new HttpParams();
@@ -93,7 +93,7 @@ export class UserService {
     params = params.append('MessageContainer', messageContainer);
 
     if (page != null && itemsPerPage != null) {
-      params = params.appent('pageNumber', page);
+      params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
     }
 

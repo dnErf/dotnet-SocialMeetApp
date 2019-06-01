@@ -37,6 +37,7 @@ namespace SocialMeetAPI
     [Obsolete]
     public void ConfigureServices(IServiceCollection services)
     {
+
       // services.AddTransient<Seed>();
 
       services.AddCors();
@@ -73,7 +74,8 @@ namespace SocialMeetAPI
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
+    // add , Seed seeder on configure if going to seed
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
       if (env.IsDevelopment())
       {
@@ -100,10 +102,18 @@ namespace SocialMeetAPI
       }
 
       // app.UseHttpsRedirection();
-      seeder.SeedUsers();
+      // seeder.SeedUsers();
       app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
       app.UseAuthentication();
-      app.UseMvc();
+      app.UseDefaultFiles();
+      app.UseStaticFiles();
+      // app.UseMvc();
+      app.UseMvc(routes => {
+        routes.MapSpaFallbackRoute(
+          name: "spa-fallback",
+          defaults: new { controller = "Fallback", Action = "Index" }
+        );
+      });
     }
   }
 }

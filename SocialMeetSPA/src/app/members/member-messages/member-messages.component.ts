@@ -41,7 +41,7 @@ export class MemberMessagesComponent implements OnInit {
         })
       )
       .subscribe(
-        messages => { this.messages = nessages; },
+        messages => { this.messages = messages; },
         error => { this.alertify.error(error); }
     );
   }

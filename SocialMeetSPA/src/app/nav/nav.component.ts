@@ -22,7 +22,7 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.uniqueName = this.authService.decodedToken?.unique_name;
+    // this.uniqueName = this.authService.decodedToken?.unique_name;
     this.authService.currentPhotoUrl
       .subscribe(
         photoUrl => this.photoUrl = photoUrl

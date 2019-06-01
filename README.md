@@ -5,3 +5,5 @@
 - API : .Net Core
 - SPA : Angular
 - ORM : Entity Framework
+
+![](/SocialMeetSPA/src/assets/home.jpg)

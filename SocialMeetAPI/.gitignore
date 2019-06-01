@@ -6,3 +6,4 @@ obj
 Migrations
 appsettings.Development.json
 Data/UserSeedData.json
+wwwroot/

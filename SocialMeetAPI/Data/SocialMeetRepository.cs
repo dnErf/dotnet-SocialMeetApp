@@ -104,8 +104,9 @@ namespace SocialMeetAPI.Data
     public async Task<PagedList<User>> GetUsers(UserParams userParams)
     {
 
-      // var users = await _context.Users.Include(p => p.Photos).ToListAsync();
+      // var users = _context.Users.Include(p => p.Photos).ToListAsync();
       // return users;
+      
 
       var users = _context.Users
         .Include(p => p.Photos)

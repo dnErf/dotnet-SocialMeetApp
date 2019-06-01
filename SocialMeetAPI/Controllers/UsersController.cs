@@ -42,7 +42,7 @@ namespace SocialMeetAPI.Controllers
         userParams.Gender = userFromRepo.Gender == "male" ? "female" : "male";
       }
 
-      // var users = await _repo.GetUsers(); w/o pagination
+      // var users = await _repo.GetUsers(); // w/o pagination
       var users = await _repo.GetUsers(userParams);
       var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
 

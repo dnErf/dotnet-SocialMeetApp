@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router/src/utils/preactivation';
-import { AuthService } from '../_services/auth.service';
-import { Router } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
+
 import { AlertifyService } from '../_services/alertify.service';
+import { AuthService } from '../_services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
     private alertify:AlertifyService
   ) {}
 
-  canActivate():boolean {
+  canActivate() {
     if (this.authService.loggedIn()) {
       return true;
     }
